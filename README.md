@@ -10,7 +10,7 @@
 # 1. Build the Docker image
 docker compose build
 
-# 2. Start Postgres
+# 2. Start Postgres in background
 docker compose up -d db
 
 # Wait 10-15 seconds
