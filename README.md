@@ -1,24 +1,28 @@
-# README
+# Kiavi Senior DevOps Take-Home Challenge - Dockerized Spina CMS
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Goal**: Provide a working local developer experience for the Spina CMS engine on a Ruby on Rails application.
 
-Things you may want to cover:
+**Status**: Fully functional and tested.
 
-* Ruby version
+## Quick Start
 
-* System dependencies
+```powershell
+# 1. Build the Docker image
+docker compose build
 
-* Configuration
+# 2. Start Postgres
+docker compose up -d db
 
-* Database creation
+# Wait 10-15 seconds
 
-* Database initialization
+# 3. Create database
+docker compose run --rm web rails db:create
 
-* How to run the test suite
+# 4. Install Active Storage
+docker compose run --rm web rails active_storage:install
 
-* Services (job queues, cache servers, search engines, etc.)
+# 5. Install Spina (interactive)
+docker compose run -it --rm web rails spina:install
 
-* Deployment instructions
-
-* ...
+# 6. Start the application
+docker compose up
