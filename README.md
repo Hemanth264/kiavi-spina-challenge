@@ -1,31 +1,41 @@
 # Rails + Spina CMS — Docker Dev Environment
 
 ## Setup Instructions
+
+**1. Build the Docker image**
 ```bash
-# 1. Build the Docker image
 docker compose build
+```
 
-# 2. Start Postgres in background
+**2. Start Postgres in background**
+```bash
 docker compose up -d db
+```
+> Wait 10–15 seconds for Postgres to be ready
 
-# Wait 10-15 seconds for Postgres to be ready
-
-# 3. Create database
+**3. Create the database**
+```bash
 docker compose run --rm web rails db:create
+```
 
-# 4. Install Active Storage
+**4. Install Active Storage**
+```bash
 docker compose run --rm web rails active_storage:install
+```
 
-# 5. Install Spina (interactive — follow the prompts)
+**5. Install Spina (interactive — follow the prompts)**
+```bash
 docker compose run -it --rm web rails spina:install
+```
 
-# 6. Start the application
+**6. Start the application**
+```bash
 docker compose up
 ```
 
 ## Key Design Choices
 
-- **gem_cache named volume** — Caching the bundle in a named volume means `bundle install` is fast on subsequent runs without rebuilding the entire image every time.
+- **gem_cache named volume** — Makes `bundle install` fast on re-runs without rebuilding the image.
 - **Bind mount for app code** — Live file changes reflect inside the container instantly.
 - **Postgres in trust mode** — No passwords needed locally. Keeps onboarding simple.
 - **HTTP only, no TLS** — Permitted for local development per the spec.
