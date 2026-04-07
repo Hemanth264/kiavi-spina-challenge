@@ -1,7 +1,7 @@
 # Rails + Spina CMS — Docker Dev Environment
 
 ## Setup Instructions
-
+```bash
 # 1. Build the Docker image
 docker compose build
 
@@ -21,21 +21,16 @@ docker compose run -it --rm web rails spina:install
 
 # 6. Start the application
 docker compose up
+```
 
 ## Key Design Choices
 
-**gem_cache named volume** — Caching the bundle in a named volume means `bundle install` 
-is fast on subsequent runs without rebuilding the entire image every time.
-
-**Bind mount for app code** — Live file changes reflect inside the container instantly.
-
-**Postgres in trust mode** — No passwords needed locally. Keeps onboarding simple.
-
-**HTTP only, no TLS** — Permitted for local development per the spec.
-
-**Added `libyaml-dev` to Dockerfile** — Fixes a `psych` gem compilation failure during build.
-
-**Removed auto-generated CI workflow** — It was failing on irrelevant defaults.
+- **gem_cache named volume** — Caching the bundle in a named volume means `bundle install` is fast on subsequent runs without rebuilding the entire image every time.
+- **Bind mount for app code** — Live file changes reflect inside the container instantly.
+- **Postgres in trust mode** — No passwords needed locally. Keeps onboarding simple.
+- **HTTP only, no TLS** — Permitted for local development per the spec.
+- **Added `libyaml-dev` to Dockerfile** — Fixes a `psych` gem compilation failure during build.
+- **Removed auto-generated CI workflow** — It was failing on irrelevant defaults.
 
 ## Challenges Faced
 
@@ -51,4 +46,5 @@ is fast on subsequent runs without rebuilding the entire image every time.
 - This is a local dev environment only — no production hardening included
 
 ## References
-- Spina CMS: https://github.com/SpinaCMS/Spina
+
+- [Spina CMS](https://github.com/SpinaCMS/Spina)
